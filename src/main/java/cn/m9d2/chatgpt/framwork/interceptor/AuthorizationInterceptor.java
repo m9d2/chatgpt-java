@@ -19,7 +19,6 @@ public class AuthorizationInterceptor implements Interceptor {
         Request originalRequest = chain.request();
         Request authorised = originalRequest.newBuilder()
                 .addHeader("Authorization", "Bearer " + apiKey)
-                .addHeader("Content-Type", "application/json")
                 .build();
         return chain.proceed(authorised);
     }

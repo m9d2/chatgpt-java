@@ -1,10 +1,18 @@
 package cn.m9d2.chatgpt.model.chat;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
 
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CompletionsResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,54 +29,10 @@ public class CompletionsResponse implements Serializable {
 
     private Usage usage;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getObject() {
-        return object;
-    }
-
-    public void setObject(String object) {
-        this.object = object;
-    }
-
-    public Long getCreated() {
-        return created;
-    }
-
-    public void setCreated(Long created) {
-        this.created = created;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public List<Choice> getChoices() {
-        return choices;
-    }
-
-    public void setChoices(List<Choice> choices) {
-        this.choices = choices;
-    }
-
-    public Usage getUsage() {
-        return usage;
-    }
-
-    public void setUsage(Usage usage) {
-        this.usage = usage;
-    }
-
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Choice {
 
         private Double index;
@@ -78,31 +42,12 @@ public class CompletionsResponse implements Serializable {
         @SerializedName("finish_reason")
         private String finishReason;
 
-        public Double getIndex() {
-            return index;
-        }
-
-        public void setIndex(Double index) {
-            this.index = index;
-        }
-
-        public Message getMessage() {
-            return message;
-        }
-
-        public void setMessage(Message message) {
-            this.message = message;
-        }
-
-        public String getFinishReason() {
-            return finishReason;
-        }
-
-        public void setFinishReason(String finishReason) {
-            this.finishReason = finishReason;
-        }
     }
 
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Usage {
 
         @SerializedName("prompt_tokens")
@@ -114,28 +59,5 @@ public class CompletionsResponse implements Serializable {
         @SerializedName("total_tokens")
         private Double totalTokens;
 
-        public Double getPromptTokens() {
-            return promptTokens;
-        }
-
-        public void setPromptTokens(Double promptTokens) {
-            this.promptTokens = promptTokens;
-        }
-
-        public Double getCompletionTokens() {
-            return completionTokens;
-        }
-
-        public void setCompletionTokens(Double completionTokens) {
-            this.completionTokens = completionTokens;
-        }
-
-        public Double getTotalTokens() {
-            return totalTokens;
-        }
-
-        public void setTotalTokens(Double totalTokens) {
-            this.totalTokens = totalTokens;
-        }
     }
 }

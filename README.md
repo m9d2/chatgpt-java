@@ -6,32 +6,40 @@
 &nbsp;
 
 ## 快速使用
+
 ### 一、引入依赖
+
 ```xml
+
 <dependency>
     <groupId>cn.m9d2.chatgpt</groupId>
     <artifactId>chatgpt</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 </dependency>
 ```
+
 &nbsp;
 
 ### 二、application.yml 配置
+
 ```yaml
 openai:
   api-key: "YOUR OWNER KEY"
   proxy:
     enable: true
-    type: socks
+    type: http
     hostname: 127.0.0.1
     port: 1087
   connect-timeout: 10000
   read-timeout: 30000
 ```
+
 &nbsp;
 
 ### 三、示例代码
+
 ```java
+
 @SpringBootApplication
 public class SampleApplication implements ApplicationRunner {
 
