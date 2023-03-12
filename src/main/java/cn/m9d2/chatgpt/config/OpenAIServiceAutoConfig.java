@@ -1,8 +1,12 @@
 package cn.m9d2.chatgpt.config;
 
 import cn.m9d2.chatgpt.framwork.interceptor.AuthorizationInterceptor;
+import cn.m9d2.chatgpt.service.AudioService;
 import cn.m9d2.chatgpt.service.ChatService;
+import cn.m9d2.chatgpt.service.ImagesService;
+import cn.m9d2.chatgpt.service.impl.AudioServiceImpl;
 import cn.m9d2.chatgpt.service.impl.ChatServiceImpl;
+import cn.m9d2.chatgpt.service.impl.ImagesServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -30,6 +34,16 @@ public class OpenAIServiceAutoConfig {
     @Bean
     public ChatService chatService() {
         return new ChatServiceImpl(interceptor, properties);
+    }
+
+    @Bean
+    public AudioService audioService() {
+        return new AudioServiceImpl(interceptor, properties);
+    }
+
+    @Bean
+    public ImagesService imagesService() {
+        return new ImagesServiceImpl(interceptor, properties);
     }
 
 }
