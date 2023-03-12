@@ -1,9 +1,13 @@
-# ChatGPT ![GitHub license](https://img.shields.io/github/license/m9d2/chatgpt)
+# ChatGPT 
 
+[![GitHub release](https://img.shields.io/github/v/release/m9d2/chatgpt?style=plastic)](https://github.com/m9d2/chatgpt/release)
 [![Maven Central](https://img.shields.io/maven-central/v/cn.m9d2.chatgpt/chatgpt)](https://mvnrepository.com/artifact/cn.m9d2.chatgpt/chatgpt)
-[![GitHub stars](https://img.shields.io/github/stars/m9d2/chatgpt.svg?style=social)](https://github.com/m9d2/chatgpt)
+[![GitHub license](https://img.shields.io/github/license/m9d2/chatgpt)](https://github.com/m9d2/chatgpt/blob/main/LICENSE)
 
 &nbsp;
+
+## 关于
+**ChatGPT**是java版本openai api的SDK，支持spring boot快速开始。
 
 ## 快速使用
 
@@ -66,3 +70,9 @@ public class SampleApplication implements ApplicationRunner {
     }
 }
 ```
+&nbsp;
+
+## 鸣谢
+本项目参考以下项目
+
+[Grt1228/chatgpt-java](https://github.com/Grt1228/chatgpt-java)
