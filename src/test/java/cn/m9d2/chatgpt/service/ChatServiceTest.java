@@ -13,7 +13,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 
 public class ChatServiceTest extends BaseTest {
@@ -22,11 +21,12 @@ public class ChatServiceTest extends BaseTest {
     public void testCompletions() {
         String content = "你好";
         String role = "user";
+        String user = "user1234";
         List<Message> messages = new ArrayList<>();
         messages.add(Message.builder().content(content).role(role).build());
         Completions completions = Completions.builder()
                 .messages(messages)
-                .user(UUID.randomUUID().toString())
+                .user(user)
                 .build();
         CompletionsResponse response = chatService.completions(completions);
         for (CompletionsResponse.Choice choice : response.getChoices()) {
@@ -38,11 +38,12 @@ public class ChatServiceTest extends BaseTest {
     public void testCompletionsForStream() {
         String content = "写一篇赞美母爱的200字文章";
         String role = "user";
+        String user = "user1234";
         List<Message> messages = new ArrayList<>();
         messages.add(Message.builder().content(content).role(role).build());
         Completions completions = Completions.builder()
                 .messages(messages)
-                .user(UUID.randomUUID().toString())
+                .user(user)
                 .build();
         chatService.completions(completions, ChatEventListener::new);
         CountDownLatch countDownLatch = new CountDownLatch(1);
