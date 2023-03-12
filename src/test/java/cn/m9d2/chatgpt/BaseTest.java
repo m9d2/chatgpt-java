@@ -4,8 +4,10 @@ import cn.m9d2.chatgpt.config.OpenAIProperties;
 import cn.m9d2.chatgpt.framwork.interceptor.AuthorizationInterceptor;
 import cn.m9d2.chatgpt.service.AudioService;
 import cn.m9d2.chatgpt.service.ChatService;
+import cn.m9d2.chatgpt.service.ImagesService;
 import cn.m9d2.chatgpt.service.impl.AudioServiceImpl;
 import cn.m9d2.chatgpt.service.impl.ChatServiceImpl;
+import cn.m9d2.chatgpt.service.impl.ImagesServiceImpl;
 import org.junit.Before;
 
 import java.net.Proxy;
@@ -18,6 +20,8 @@ public class BaseTest {
 
     protected AudioService audioService;
 
+    protected ImagesService imagesService;
+
     @Before
     public void before() {
         OpenAIProperties properties = new OpenAIProperties();
@@ -28,6 +32,7 @@ public class BaseTest {
         authorizationInterceptor = new AuthorizationInterceptor(properties.getApiKey());
         chatService = new ChatServiceImpl(authorizationInterceptor, properties);
         audioService = new AudioServiceImpl(authorizationInterceptor, properties);
+        imagesService = new ImagesServiceImpl(authorizationInterceptor, properties);
     }
 
     private OpenAIProperties.Proxy getProxy() {

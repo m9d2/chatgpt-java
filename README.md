@@ -1,6 +1,6 @@
 # ChatGPT 
 
-[![GitHub release](https://img.shields.io/github/v/release/m9d2/chatgpt?style=plastic)](https://github.com/m9d2/chatgpt/releases)
+[![GitHub release](https://img.shields.io/github/v/release/m9d2/chatgpt)](https://github.com/m9d2/chatgpt/releases)
 [![Maven Central](https://img.shields.io/maven-central/v/cn.m9d2.chatgpt/chatgpt)](https://mvnrepository.com/artifact/cn.m9d2.chatgpt/chatgpt)
 [![GitHub license](https://img.shields.io/github/license/m9d2/chatgpt)](https://github.com/m9d2/chatgpt/blob/main/LICENSE)
 
