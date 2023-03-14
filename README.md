@@ -17,7 +17,7 @@ Java版本openai api的SDK，支持spring boot快速开始。
 <dependency>
     <groupId>cn.m9d2.chatgpt</groupId>
     <artifactId>chatgpt</artifactId>
-    <version>0.0.2</version>
+    <version>{release-version}</version>
 </dependency>
 ```
 
