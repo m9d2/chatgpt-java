@@ -10,7 +10,7 @@ public class AudioServiceTest extends BaseTest {
 
     @Test
     public void transcriptions() {
-        String file = "test.m4a";
+        String file = "audio/introduce.m4a";
         String text = audioService.transcriptions(new File(file));
         System.out.println(text);
         Assert.assertNotNull(text);
@@ -18,7 +18,7 @@ public class AudioServiceTest extends BaseTest {
 
     @Test
     public void translations() {
-        String file = "test.m4a";
+        String file = "audio/introduce.m4a";
         String text = audioService.translations(new File(file));
         System.out.println(text);
         Assert.assertNotNull(text);

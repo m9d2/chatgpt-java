@@ -1,7 +1,7 @@
 package cn.m9d2.chatgpt.service.impl;
 
 import cn.m9d2.chatgpt.AbstractService;
-import cn.m9d2.chatgpt.ConsumerListener;
+import cn.m9d2.chatgpt.MessageListener;
 import cn.m9d2.chatgpt.OpenAIClient;
 import cn.m9d2.chatgpt.config.OpenAIProperties;
 import cn.m9d2.chatgpt.framwork.enums.ContentType;
@@ -19,7 +19,6 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
-import java.util.function.Supplier;
 
 public class ChatServiceImpl extends AbstractService implements ChatService {
 
@@ -43,14 +42,14 @@ public class ChatServiceImpl extends AbstractService implements ChatService {
     }
 
     @Override
-    public <T extends ConsumerListener> void completions(Completions completions, Supplier<T> supplier) {
+    public <T extends MessageListener> void completions(Completions completions, T consumerListener) {
         completions.setStream(true);
         EventSource.Factory factory = EventSources.createFactory(this.okHttpClient);
         Request request = new Request.Builder()
                 .url(OpenAIClient.URL + "chat/completions")
                 .post(RequestBody.create(MediaType.parse(ContentType.JSON.getValue()), new Gson().toJson(completions)))
                 .build();
-        factory.newEventSource(request, supplier.get());
+        factory.newEventSource(request, consumerListener);
     }
 
 }

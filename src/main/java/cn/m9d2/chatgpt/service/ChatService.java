@@ -1,11 +1,9 @@
 package cn.m9d2.chatgpt.service;
 
-import cn.m9d2.chatgpt.ConsumerListener;
+import cn.m9d2.chatgpt.MessageListener;
 import cn.m9d2.chatgpt.OpenAIService;
 import cn.m9d2.chatgpt.model.chat.Completions;
 import cn.m9d2.chatgpt.model.chat.CompletionsResponse;
-
-import java.util.function.Supplier;
 
 public interface ChatService extends OpenAIService {
 
@@ -21,8 +19,10 @@ public interface ChatService extends OpenAIService {
      * 问答，流式输出
      *
      * @param completions 参数
-     * @param supplier    ConsumerListener对象
+     * @param messageListener    MessageListener实例
+     *                           需要实现 onMessaged
+     *                                   onDone
      */
-    <T extends ConsumerListener> void completions(Completions completions, Supplier<T> supplier);
+    <T extends MessageListener> void completions(Completions completions, T messageListener);
 
 }

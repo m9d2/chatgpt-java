@@ -1,14 +1,11 @@
 package cn.m9d2.chatgpt.service;
 
 import cn.m9d2.chatgpt.BaseTest;
-import cn.m9d2.chatgpt.ConsumerListener;
+import cn.m9d2.chatgpt.MessageListener;
 import cn.m9d2.chatgpt.model.chat.Completions;
 import cn.m9d2.chatgpt.model.chat.CompletionsResponse;
 import cn.m9d2.chatgpt.model.chat.Message;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -29,9 +26,12 @@ public class ChatServiceTest extends BaseTest {
                 .user(user)
                 .build();
         CompletionsResponse response = chatService.completions(completions);
+        String text = null;
         for (CompletionsResponse.Choice choice : response.getChoices()) {
-            System.out.println(choice.getMessage().getContent());
+            text = choice.getMessage().getContent();
         }
+        System.out.println(text);
+        Assert.assertNotNull(text);
     }
 
     @Test
@@ -45,8 +45,18 @@ public class ChatServiceTest extends BaseTest {
                 .messages(messages)
                 .user(user)
                 .build();
-        chatService.completions(completions, ChatEventListener::new);
         CountDownLatch countDownLatch = new CountDownLatch(1);
+        chatService.completions(completions, new MessageListener() {
+            @Override
+            public void onMessaged(String data) {
+                System.out.println(data);
+            }
+
+            @Override
+            public void onDone() {
+                countDownLatch.countDown();
+            }
+        });
         try {
             countDownLatch.await();
         } catch (InterruptedException e) {
@@ -54,21 +64,4 @@ public class ChatServiceTest extends BaseTest {
         }
     }
 
-    @Slf4j
-    public static class ChatEventListener extends ConsumerListener {
-
-        @Override
-        public void onMessage(String data) {
-            if (!data.equals("[DONE]")) {
-                JsonObject jsonObject = (JsonObject) new JsonParser().parse(data);
-                JsonObject choice = (JsonObject) jsonObject.getAsJsonArray("choices").get(0);
-                JsonObject delta = choice.getAsJsonObject("delta");
-                JsonElement jsonElement = delta.get("content");
-                if (jsonElement != null) {
-                    String content = jsonElement.getAsString();
-                    System.out.print(content);
-                }
-            }
-        }
-    }
 }
