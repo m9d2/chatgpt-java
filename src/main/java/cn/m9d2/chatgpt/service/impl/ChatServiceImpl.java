@@ -5,6 +5,7 @@ import cn.m9d2.chatgpt.MessageListener;
 import cn.m9d2.chatgpt.OpenAIClient;
 import cn.m9d2.chatgpt.config.OpenAIProperties;
 import cn.m9d2.chatgpt.framwork.enums.ContentType;
+import cn.m9d2.chatgpt.framwork.excption.OpenAIException;
 import cn.m9d2.chatgpt.framwork.interceptor.AuthorizationInterceptor;
 import cn.m9d2.chatgpt.model.chat.Completions;
 import cn.m9d2.chatgpt.model.chat.CompletionsResponse;
@@ -33,7 +34,7 @@ public class ChatServiceImpl extends AbstractService implements ChatService {
         try {
             response = call.execute();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new OpenAIException(e.getMessage());
         }
         if (!response.isSuccessful()) {
             handleErrorResponse(response);
