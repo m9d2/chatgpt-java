@@ -1,6 +1,6 @@
 package cn.m9d2.chatgpt.model.chat;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,16 +17,22 @@ public class CompletionsResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @JsonProperty("id")
     private String id;
 
+    @JsonProperty("object")
     private String object;
 
+    @JsonProperty("created")
     private Long created;
 
+    @JsonProperty("model")
     private String model;
 
+    @JsonProperty("choices")
     private List<Choice> choices;
 
+    @JsonProperty("usage")
     private Usage usage;
 
     @Data
@@ -35,11 +41,13 @@ public class CompletionsResponse implements Serializable {
     @NoArgsConstructor
     public static class Choice {
 
+        @JsonProperty("index")
         private Double index;
 
+        @JsonProperty("message")
         private Message message;
 
-        @SerializedName("finish_reason")
+        @JsonProperty("finish_reason")
         private String finishReason;
 
     }
@@ -50,13 +58,13 @@ public class CompletionsResponse implements Serializable {
     @NoArgsConstructor
     public static class Usage {
 
-        @SerializedName("prompt_tokens")
+        @JsonProperty("prompt_tokens")
         private Double promptTokens;
 
-        @SerializedName("completion_tokens")
+        @JsonProperty("completion_tokens")
         private Double completionTokens;
 
-        @SerializedName("total_tokens")
+        @JsonProperty("total_tokens")
         private Double totalTokens;
 
     }

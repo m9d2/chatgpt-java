@@ -1,6 +1,6 @@
 package cn.m9d2.chatgpt.model.chat;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.io.Serializable;
@@ -14,28 +14,33 @@ public class Completions implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @JsonProperty("model")
     @Builder.Default
     private String model = Model.GPT_3_5_TURBO.getValue();
 
+    @JsonProperty("messages")
     private List<Message> messages;
 
+    @JsonProperty("stream")
     @Builder.Default
     private Boolean stream = false;
 
+    @JsonProperty("stop")
     private List<String> stop;
 
-    @SerializedName("max_tokens")
+    @JsonProperty("max_tokens")
     @Builder.Default
     private Integer maxTokens = 2048;
 
-    @SerializedName("presence_penalty")
+    @JsonProperty("presence_penalty")
     @Builder.Default
     private double presencePenalty = 0;
 
-    @SerializedName("frequency_penalty")
+    @JsonProperty("frequency_penalty")
     @Builder.Default
     private double frequencyPenalty = 0;
 
+    @JsonProperty("user")
     private String user;
 
     @Getter

@@ -33,7 +33,7 @@
         </dependency>
         <dependency>
             <groupId>com.squareup.retrofit2</groupId>
-            <artifactId>converter-gson</artifactId>
+            <artifactId>converter-jackson</artifactId>
             <version>${retrofit2.version}</version>
         </dependency>
         <dependency>

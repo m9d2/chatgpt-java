@@ -8,7 +8,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -50,7 +50,7 @@ public abstract class AbstractService implements OpenAIService {
             retrofit = new Retrofit.Builder()
                     .baseUrl(OpenAIClient.URL)
                     .client(okHttpClient)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(JacksonConverterFactory.create())
                     .build();
         }
         return retrofit;

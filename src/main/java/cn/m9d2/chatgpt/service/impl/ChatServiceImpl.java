@@ -10,7 +10,8 @@ import cn.m9d2.chatgpt.framwork.interceptor.AuthorizationInterceptor;
 import cn.m9d2.chatgpt.model.chat.Completions;
 import cn.m9d2.chatgpt.model.chat.CompletionsResponse;
 import cn.m9d2.chatgpt.service.ChatService;
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -23,8 +24,11 @@ import java.io.IOException;
 
 public class ChatServiceImpl extends AbstractService implements ChatService {
 
+    private final ObjectMapper objectMapper;
+
     public ChatServiceImpl(AuthorizationInterceptor interceptor, OpenAIProperties properties) {
         super(interceptor, properties);
+        objectMapper = new ObjectMapper();
     }
 
     @Override
@@ -46,10 +50,15 @@ public class ChatServiceImpl extends AbstractService implements ChatService {
     public <T extends MessageListener> void completions(Completions completions, T consumerListener) {
         completions.setStream(true);
         EventSource.Factory factory = EventSources.createFactory(this.okHttpClient);
-        Request request = new Request.Builder()
-                .url(OpenAIClient.URL + "chat/completions")
-                .post(RequestBody.create(MediaType.parse(ContentType.JSON.getValue()), new Gson().toJson(completions)))
-                .build();
+        Request request;
+        try {
+            request = new Request.Builder()
+                    .url(OpenAIClient.URL + "chat/completions")
+                    .post(RequestBody.create(MediaType.parse(ContentType.JSON.getValue()), objectMapper.writeValueAsString(completions)))
+                    .build();
+        } catch (JsonProcessingException e) {
+            throw new OpenAIException(e.getMessage());
+        }
         factory.newEventSource(request, consumerListener);
     }
 

@@ -1,5 +1,6 @@
 package cn.m9d2.chatgpt.model.audio;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -9,6 +10,7 @@ public class AudioResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @JsonProperty("text")
     private String text;
 
 }
