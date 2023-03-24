@@ -6,7 +6,7 @@
 
     <groupId>cn.m9d2.chatgpt</groupId>
     <artifactId>chatgpt</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <packaging>jar</packaging>
     <description>OpenAI spring boot starter</description>
     <url>https://github.com/m9d2/chatgpt</url>
