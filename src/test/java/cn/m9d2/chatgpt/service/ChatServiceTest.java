@@ -36,7 +36,7 @@ public class ChatServiceTest extends BaseTest {
 
     @Test
     public void testCompletionsForStream() {
-        String content = "写一篇赞美母爱的200字文章";
+        String content = "你好";
         String role = "user";
         String user = "user1234";
         List<Message> messages = new ArrayList<>();

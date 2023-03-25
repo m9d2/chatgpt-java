@@ -24,8 +24,9 @@ public class BaseTest {
 
     @Before
     public void before() {
+        String key = System.getenv("OPENAI_KEY");
         OpenAIProperties properties = new OpenAIProperties();
-        properties.setApiKey("sk-...");
+        properties.setApiKey(key);
         properties.setConnectTimeout(10000L);
         properties.setReadTimeout(60000L);
         properties.setProxy(getProxy());
