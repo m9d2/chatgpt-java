@@ -73,8 +73,3 @@ public class SampleApplication implements ApplicationRunner {
 
 ## Spring boot示例项目
 [sample-chatgpt](https://github.com/m9d2/sample-chatgpt)
-
-## 鸣谢
-本项目参考以下项目
-
-[Grt1228/chatgpt-java](https://github.com/Grt1228/chatgpt-java)
