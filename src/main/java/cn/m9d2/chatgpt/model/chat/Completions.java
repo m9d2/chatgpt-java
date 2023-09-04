@@ -51,6 +51,7 @@ public class Completions implements Serializable {
         GPT_4("gpt-4"),
 
         GPT_4_32K("gpt-4-32k"),
+        GPT_4_32K_0613("gpt-4-32k-0613"),
         ;
         private final String value;
 
