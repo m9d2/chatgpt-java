@@ -4,15 +4,15 @@
 [![Maven Central](https://img.shields.io/maven-central/v/cn.m9d2.chatgpt/chatgpt)](https://mvnrepository.com/artifact/cn.m9d2.chatgpt/chatgpt)
 [![GitHub license](https://img.shields.io/github/license/m9d2/chatgpt)](https://github.com/m9d2/chatgpt/blob/main/LICENSE)
 
-This library provides unofficial Java clients for OpenAI's apis.
+Java版本ChatGPT客户端，支持Spring boot快速开始。
 
-Languages： English | [中文](README_CN.md)
+Languages： 中文 | [English](README.md)
 
 &nbsp;
 
-## Quick start
+## 快速使用
 
-### Introducing Dependencies
+### 引入依赖
 
 ```xml
 
@@ -25,7 +25,7 @@ Languages： English | [中文](README_CN.md)
 
 &nbsp;
 
-### Configure application.yml
+### application.yml 配置
 
 ```yaml
 chatpgt:
@@ -42,7 +42,7 @@ chatpgt:
 
 &nbsp;
 
-### Sample
+### 示例代码
 
 ```java
 
@@ -61,7 +61,7 @@ public class SampleApplication implements ApplicationRunner {
         Completions completions = new Completions();
         List<Message> messages = new ArrayList<>();
         Message message = new Message();
-        message.setContent("hello");
+        message.setContent("你好");
         message.setRole("user");
         messages.add(message);
         completions.setMessages(messages);
@@ -75,6 +75,6 @@ public class SampleApplication implements ApplicationRunner {
 
 &nbsp;
 
-## Demo
+## Spring boot示例项目
 
 [sample-chatgpt](https://github.com/m9d2/sample-chatgpt)

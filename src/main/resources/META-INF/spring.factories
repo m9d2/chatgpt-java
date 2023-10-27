@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.m9d2.chatgpt.config.OpenAIServiceAutoConfig, \
-cn.m9d2.chatgpt.config.InterceptorAutoConfig
