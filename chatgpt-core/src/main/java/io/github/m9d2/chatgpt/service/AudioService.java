@@ -15,6 +15,12 @@ public interface AudioService {
      */
     String transcriptions(File file, AudioModel model);
 
+    /**
+     *语音转文字
+     *
+     * @param file 语音文件
+     * @return 转换后的结果
+     */
     String transcriptions(File file);
 
     /**
@@ -25,8 +31,19 @@ public interface AudioService {
      */
     String translations(File file, AudioModel model, Locale locale);
 
+    /**
+     *
+     * @param file 语音文件
+     * @return 翻译后的结果
+     */
     String translations(File file);
 
+    /**
+     *
+     * @param file 语音文件
+     * @param locale locale
+     * @return 翻译后的结果
+     */
     String translations(File file, Locale locale);
 
 }
