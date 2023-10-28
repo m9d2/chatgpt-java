@@ -16,14 +16,12 @@ public class ChatServiceTest extends BaseTest {
 
     @Test
     public void testCompletions() {
-        String content = "你好";
-        String role = "user";
-        String user = "user1234";
         List<Message> messages = new ArrayList<>();
-        messages.add(Message.builder().content(content).role(role).build());
+        messages.add(Message.builder().content("你是linux服务器，我输入命令，你执行命令，并返回执行结果").role(Message.Role.USER.getValue()).build());
+        messages.add(Message.builder().content("ls").role(Message.Role.ASSISTANT.getValue()).build());
         Completions completions = Completions.builder()
                 .messages(messages)
-                .user(user)
+                .user("user")
                 .build();
         CompletionsResponse response = chatService.completions(completions);
         String text = null;
@@ -37,7 +35,7 @@ public class ChatServiceTest extends BaseTest {
     @Test
     public void testCompletionsForStream() {
         String content = "你好";
-        String role = "user";
+        String role = Message.Role.USER.getValue();
         String user = "user1234";
         List<Message> messages = new ArrayList<>();
         messages.add(Message.builder().content(content).role(role).build());

@@ -6,6 +6,11 @@ import io.github.m9d2.chatgpt.model.images.ImagesResponse;
 
 public interface ImagesService extends OpenAIService {
 
+    /**
+     * Creates an image given a prompt.
+     *
+     * @param images images
+     */
     ImagesResponse generations(Images images);
 
 }

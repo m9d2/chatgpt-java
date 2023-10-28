@@ -8,18 +8,20 @@ import java.time.LocalDate;
 public interface BillingService {
 
     /**
-     * 账户信息
+     * Subscription
      *
      * @return Subscription
      */
+    @Deprecated
     Subscription subscription();
 
     /**
-     * 消耗金额信息查询
+     * Billing usage
      *
-     * @param starDate 开始时间
-     * @param endDate  结束时间
+     * @param starDate start date
+     * @param endDate  end date
      * @return BillingUsage
      */
+    @Deprecated
     BillingUsage billingUsage(LocalDate starDate, LocalDate endDate);
 }

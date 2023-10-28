@@ -2,8 +2,8 @@ package io.github.m9d2.chatgpt.service.impl;
 
 import io.github.m9d2.chatgpt.AbstractService;
 import io.github.m9d2.chatgpt.ChatGptConfig;
+import io.github.m9d2.chatgpt.framwork.constants.RequestParam;
 import io.github.m9d2.chatgpt.framwork.enums.ContentType;
-import io.github.m9d2.chatgpt.framwork.interceptor.AuthorizationInterceptor;
 import io.github.m9d2.chatgpt.model.audio.AudioModel;
 import io.github.m9d2.chatgpt.model.audio.AudioResponse;
 import io.github.m9d2.chatgpt.service.AudioService;
@@ -20,52 +20,58 @@ import java.util.Objects;
 
 public class AudioServiceImpl extends AbstractService implements AudioService {
 
-    private static final String MODEL_KEY = "model";
-
-    private static final String FILE_KEY = "file";
-
-    private static final String LANGUAGE_KEY = "language";
-
     public AudioServiceImpl(ChatGptConfig config) {
         super(config);
     }
 
     @Override
-    public String transcriptions(File file, AudioModel model) {
+    public String transcriptions(File file) {
+        return transcriptions(file, AudioModel.WHISPER_1, Locale.getDefault(), "");
+    }
+
+    @Override
+    public String transcriptions(File file, Locale locale) {
+        return transcriptions(file, AudioModel.WHISPER_1, locale, "");
+    }
+
+    @Override
+    public String transcriptions(File file, Locale locale, String prompt) {
+        return transcriptions(file, AudioModel.WHISPER_1, locale, prompt);
+    }
+
+    @Override
+    public String transcriptions(File file, AudioModel model, Locale locale, String prompt) {
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart(MODEL_KEY, model.getValue())
+                .addFormDataPart(RequestParam.MODEL, model.getValue())
                 .addPart(createFile(file))
+                .addFormDataPart(RequestParam.LANGUAGE, locale.getLanguage())
+                .addFormDataPart(RequestParam.PROMPT, prompt)
                 .build();
         Call<AudioResponse> call = this.client.transcriptions(requestBody);
         return getAudioResponse(call);
     }
 
     @Override
-    public String transcriptions(File file) {
-        return transcriptions(file, AudioModel.WHISPER_1);
+    public String translations(File file) {
+        return translations(file, AudioModel.WHISPER_1, "");
     }
 
     @Override
-    public String translations(File file, AudioModel model, Locale locale) {
+    public String translations(File file, String prompt) {
+        return translations(file, AudioModel.WHISPER_1, prompt);
+    }
+
+    @Override
+    public String translations(File file, AudioModel model, String prompt) {
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart(MODEL_KEY, model.getValue())
-                .addFormDataPart(LANGUAGE_KEY, locale.getLanguage())
+                .addFormDataPart(RequestParam.MODEL, model.getValue())
+                .addFormDataPart(RequestParam.PROMPT, prompt)
                 .addPart(createFile(file))
                 .build();
         Call<AudioResponse> call = this.client.translations(requestBody);
         return getAudioResponse(call);
-    }
-
-    @Override
-    public String translations(File file) {
-        return translations(file, AudioModel.WHISPER_1, Locale.CHINESE);
-    }
-
-    @Override
-    public String translations(File file, Locale locale) {
-        return translations(file, AudioModel.WHISPER_1, locale);
     }
 
     private String getAudioResponse(Call<AudioResponse> call) {
@@ -83,7 +89,7 @@ public class AudioServiceImpl extends AbstractService implements AudioService {
 
     private MultipartBody.Part createFile(File file) {
         RequestBody fileBody = RequestBody.create(MediaType.parse(ContentType.MULTIPART.getValue()), file);
-        return MultipartBody.Part.createFormData(FILE_KEY, file.getName(), fileBody);
+        return MultipartBody.Part.createFormData(RequestParam.FILE, file.getName(), fileBody);
     }
 
 }

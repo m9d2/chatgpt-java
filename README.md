@@ -10,6 +10,13 @@ Languages： English | [中文](README_CN.md)
 
 &nbsp;
 
+## Supported APIs
+
+- [Audio](https://platform.openai.com/docs/api-reference/audio)
+- [Chat](https://platform.openai.com/docs/api-reference/chat)
+- [Completions](https://platform.openai.com/docs/api-reference/completions)
+- [images](https://platform.openai.com/docs/api-reference/images)
+
 ## Quick start
 
 ### Introducing Dependencies
@@ -72,9 +79,3 @@ public class SampleApplication implements ApplicationRunner {
     }
 }
 ```
-
-&nbsp;
-
-## Demo
-
-[sample-chatgpt](https://github.com/m9d2/sample-chatgpt)

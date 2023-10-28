@@ -20,14 +20,14 @@ public interface OpenAIClient {
 
     String URL = "https://api.openai.com/v1/";
 
-    @POST("chat/completions")
-    Call<CompletionsResponse> completions(@Body Completions body);
-
     @POST("audio/transcriptions")
     Call<AudioResponse> transcriptions(@Body RequestBody requestBody);
 
     @POST("audio/translations")
     Call<AudioResponse> translations(@Body RequestBody requestBody);
+
+    @POST("chat/completions")
+    Call<CompletionsResponse> completions(@Body Completions body);
 
     @POST("images/generations")
     Call<ImagesResponse> generations(@Body Images body);

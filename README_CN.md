@@ -10,14 +10,14 @@ Languages： 中文 | [English](README.md)
 
 &nbsp;
 
-## 支持的Apis
+## 支持的APIs
 
-| 模块    |             功能             |   是否支持 |
-|:------|:--------------------------:|-------:|
-| Audio |       transcription        | &#9745 |
-| Audio |        translation         | &#9745 |
-| Chat  |         completion         |        |
-| Chat  | The chat completion object | &#9745 |
+
+- [Audio](https://platform.openai.com/docs/api-reference/audio)
+- [Chat](https://platform.openai.com/docs/api-reference/chat)
+- [Completions](https://platform.openai.com/docs/api-reference/completions)
+- [images](https://platform.openai.com/docs/api-reference/images)
+
 
 ## 快速使用
 
@@ -81,9 +81,3 @@ public class SampleApplication implements ApplicationRunner {
     }
 }
 ```
-
-&nbsp;
-
-## Spring boot示例项目
-
-[sample-chatgpt](https://github.com/m9d2/sample-chatgpt)
