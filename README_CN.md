@@ -1,14 +1,23 @@
 # Java ChatGPT
 
 [![GitHub release](https://img.shields.io/github/v/release/m9d2/chatgpt)](https://github.com/m9d2/chatgpt/releases)
-[![Maven Central](https://img.shields.io/maven-central/v/cn.m9d2.chatgpt/chatgpt)](https://mvnrepository.com/artifact/cn.m9d2.chatgpt/chatgpt)
-[![GitHub license](https://img.shields.io/github/license/m9d2/chatgpt)](https://github.com/m9d2/chatgpt/blob/main/LICENSE)
+[![Maven Central](https://img.shields.io/maven-central/v/cn.m9d2.chatgpt/chatgpt)](https://mvnrepository.com/artifact/io.github.m9d2/chatgpt-java)
+[![GitHub license](https://img.shields.io/github/license/m9d2/chatgpt)](https://github.com/m9d2/chatgpt-java/blob/main/LICENSE)
 
-Java版本ChatGPT客户端，支持Spring boot快速开始。
+Java版本openai客户端，支持Spring boot快速开始。
 
 Languages： 中文 | [English](README.md)
 
 &nbsp;
+
+## 支持的Apis
+
+| 模块    |             功能             |   是否支持 |
+|:------|:--------------------------:|-------:|
+| Audio |       transcription        | &#9745 |
+| Audio |        translation         | &#9745 |
+| Chat  |         completion         |        |
+| Chat  | The chat completion object | &#9745 |
 
 ## 快速使用
 

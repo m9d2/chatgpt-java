@@ -26,7 +26,7 @@ public interface OpenAIClient {
     @POST("audio/transcriptions")
     Call<AudioResponse> transcriptions(@Body RequestBody requestBody);
 
-    @POST("audio/transcriptions")
+    @POST("audio/translations")
     Call<AudioResponse> translations(@Body RequestBody requestBody);
 
     @POST("images/generations")
