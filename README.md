@@ -57,7 +57,7 @@ chatpgt:
 public class SampleApplication implements ApplicationRunner {
 
     @Autowired
-    private ChatService chatService;
+    private OpenAIService openAIService;
 
     public static void main(String[] args) {
         SpringApplication.run(SampleApplication.class, args);
@@ -72,7 +72,7 @@ public class SampleApplication implements ApplicationRunner {
         message.setRole("user");
         messages.add(message);
         completions.setMessages(messages);
-        CompletionsResponse response = chatService.completions(completions);
+        CompletionsResponse response = openAIService.completions(completions);
         for (CompletionsResponse.Choice choice : response.getChoices()) {
             System.out.print(choice.getMessage().getContent());
         }
