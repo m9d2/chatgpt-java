@@ -1,4 +1,4 @@
-package io.github.m9d2.chatgpt.model.billing;
+package io.github.m9d2.chatgpt.model.openai.billing;
 
 import lombok.Data;
 

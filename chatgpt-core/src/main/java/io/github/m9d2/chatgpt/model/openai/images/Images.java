@@ -1,4 +1,4 @@
-package io.github.m9d2.chatgpt.model.images;
+package io.github.m9d2.chatgpt.model.openai.images;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

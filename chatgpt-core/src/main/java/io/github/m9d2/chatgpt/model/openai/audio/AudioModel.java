@@ -1,4 +1,4 @@
-package io.github.m9d2.chatgpt.model.audio;
+package io.github.m9d2.chatgpt.model.openai.audio;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

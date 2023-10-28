@@ -1,11 +1,5 @@
 package io.github.m9d2.chatgpt;
 
-import io.github.m9d2.chatgpt.service.AudioService;
-import io.github.m9d2.chatgpt.service.ChatService;
-import io.github.m9d2.chatgpt.service.ImagesService;
-import io.github.m9d2.chatgpt.service.impl.AudioServiceImpl;
-import io.github.m9d2.chatgpt.service.impl.ChatServiceImpl;
-import io.github.m9d2.chatgpt.service.impl.ImagesServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -24,18 +18,8 @@ public class ChatGPTServiceAutoConfig {
     }
 
     @Bean
-    public ChatService chatService() {
-        return new ChatServiceImpl(properties.getConfig());
-    }
-
-    @Bean
-    public AudioService audioService() {
-        return new AudioServiceImpl(properties.getConfig());
-    }
-
-    @Bean
-    public ImagesService imagesService() {
-        return new ImagesServiceImpl(properties.getConfig());
+    public OpenAIService openAIService() {
+        return new OpenAIService(properties.getConfig());
     }
 
 }

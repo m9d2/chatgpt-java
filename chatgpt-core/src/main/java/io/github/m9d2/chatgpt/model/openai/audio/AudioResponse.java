@@ -1,4 +1,4 @@
-package io.github.m9d2.chatgpt.model.audio;
+package io.github.m9d2.chatgpt.model.openai.audio;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

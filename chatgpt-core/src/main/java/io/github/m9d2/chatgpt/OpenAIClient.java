@@ -1,12 +1,12 @@
 package io.github.m9d2.chatgpt;
 
-import io.github.m9d2.chatgpt.model.audio.AudioResponse;
-import io.github.m9d2.chatgpt.model.billing.BillingUsage;
-import io.github.m9d2.chatgpt.model.billing.Subscription;
-import io.github.m9d2.chatgpt.model.chat.Completions;
-import io.github.m9d2.chatgpt.model.chat.CompletionsResponse;
-import io.github.m9d2.chatgpt.model.images.Images;
-import io.github.m9d2.chatgpt.model.images.ImagesResponse;
+import io.github.m9d2.chatgpt.model.openai.audio.AudioResponse;
+import io.github.m9d2.chatgpt.model.openai.billing.BillingUsage;
+import io.github.m9d2.chatgpt.model.openai.billing.Subscription;
+import io.github.m9d2.chatgpt.model.openai.chat.Completions;
+import io.github.m9d2.chatgpt.model.openai.chat.CompletionsResponse;
+import io.github.m9d2.chatgpt.model.openai.images.Images;
+import io.github.m9d2.chatgpt.model.openai.images.ImagesResponse;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
