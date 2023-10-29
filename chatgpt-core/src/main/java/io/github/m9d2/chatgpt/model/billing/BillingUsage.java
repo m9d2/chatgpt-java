@@ -1,4 +1,4 @@
-package io.github.m9d2.chatgpt.model.openai.billing;
+package io.github.m9d2.chatgpt.model.billing;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

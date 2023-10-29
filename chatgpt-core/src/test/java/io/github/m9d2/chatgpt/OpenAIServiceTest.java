@@ -1,10 +1,10 @@
 package io.github.m9d2.chatgpt;
 
-import io.github.m9d2.chatgpt.model.openai.chat.Completions;
-import io.github.m9d2.chatgpt.model.openai.chat.CompletionsResponse;
-import io.github.m9d2.chatgpt.model.openai.chat.Message;
-import io.github.m9d2.chatgpt.model.openai.images.Images;
-import io.github.m9d2.chatgpt.model.openai.images.ImagesResponse;
+import io.github.m9d2.chatgpt.model.chat.Completions;
+import io.github.m9d2.chatgpt.model.chat.CompletionsResponse;
+import io.github.m9d2.chatgpt.model.chat.Message;
+import io.github.m9d2.chatgpt.model.images.Images;
+import io.github.m9d2.chatgpt.model.images.ImagesResponse;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
