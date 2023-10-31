@@ -1,8 +1,8 @@
 # Java ChatGPT
 
-[![GitHub release](https://img.shields.io/github/v/release/m9d2/chatgpt)](https://github.com/m9d2/chatgpt/releases)
-[![Maven Central](https://img.shields.io/maven-central/v/cn.m9d2.chatgpt/chatgpt)](https://mvnrepository.com/artifact/io.github.m9d2/chatgpt-java)
-[![GitHub license](https://img.shields.io/github/license/m9d2/chatgpt)](https://github.com/m9d2/chatgpt-java/blob/main/LICENSE)
+[![GitHub release](https://img.shields.io/github/v/release/m9d2/chatgpt-java)](https://github.com/m9d2/chatgpt/releases)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.m9d2/chatgpt-spring-boot-starter)](https://mvnrepository.com/artifact/cn.m9d2.chatgpt/chatgpt)
+[![GitHub license](https://img.shields.io/github/license/m9d2/chatgpt-java)](https://github.com/m9d2/chatgpt/blob/main/LICENSE)
 
 Java版本openai客户端，支持Spring boot快速开始。
 
