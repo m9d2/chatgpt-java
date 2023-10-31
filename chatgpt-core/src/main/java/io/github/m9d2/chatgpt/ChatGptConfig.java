@@ -20,7 +20,7 @@ public class ChatGptConfig {
      */
     private Long readTimeout = 10000L;
 
-    private Proxy proxy;
+    private Proxy proxy = new Proxy();
 
     @Data
     public static class Proxy {

@@ -9,6 +9,6 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 public class ChatGPTProperties {
 
     @NestedConfigurationProperty
-    private ChatGptConfig config;
+    private ChatGptConfig config = new ChatGptConfig();
 
 }
