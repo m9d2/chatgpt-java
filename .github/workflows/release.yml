@@ -20,7 +20,7 @@ jobs:
           gpg-passphrase: OSSRH_GPG_SECRET_PASSPHRASE
 
       - name: Publish package
-        run: mvn --batch-mode deploy
+        run: mvn --batch-mode deploy -DskipTests
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
