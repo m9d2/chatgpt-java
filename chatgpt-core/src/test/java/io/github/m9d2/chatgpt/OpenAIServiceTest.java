@@ -3,19 +3,19 @@ package io.github.m9d2.chatgpt;
 import io.github.m9d2.chatgpt.model.chat.Completions;
 import io.github.m9d2.chatgpt.model.chat.CompletionsResponse;
 import io.github.m9d2.chatgpt.model.chat.Message;
+import io.github.m9d2.chatgpt.model.files.File;
+import io.github.m9d2.chatgpt.model.files.FileResponse;
 import io.github.m9d2.chatgpt.model.images.Images;
 import io.github.m9d2.chatgpt.model.images.ImagesResponse;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
-import java.io.File;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+@Ignore
 public class OpenAIServiceTest {
 
     private OpenAIService openAIService;
@@ -29,6 +29,8 @@ public class OpenAIServiceTest {
         config.setReadTimeout(60000L);
         config.setProxy(getProxy());
         openAIService = new OpenAIService(config);
+
+        uploadFile();
     }
 
     private ChatGptConfig.Proxy getProxy() {
@@ -38,6 +40,15 @@ public class OpenAIServiceTest {
         proxy.setHostname("127.0.0.1");
         proxy.setType(Proxy.Type.HTTP);
         return proxy;
+    }
+
+    private void uploadFile() {
+        URL url = OpenAIServiceTest.class.getClassLoader().getResource("data.jsonl");
+        if (url == null) {
+            Assert.fail();
+        }
+        java.io.File file = new java.io.File(url.getFile());
+        openAIService.uploadFile(file);
     }
 
     @Test
@@ -83,24 +94,24 @@ public class OpenAIServiceTest {
     }
 
     @Test
-    public void transcriptions() {
+    public void testTranscriptions() {
         URL url = OpenAIServiceTest.class.getClassLoader().getResource("introduce.m4a");
         if (url == null) {
             Assert.fail();
         }
-        File file = new File(url.getFile());
+        java.io.File file = new java.io.File(url.getFile());
         String text = openAIService.transcriptions(file);
         System.out.println(text);
         Assert.assertNotNull(text);
     }
 
     @Test
-    public void translations() {
+    public void testTranslations() {
         URL url = OpenAIServiceTest.class.getClassLoader().getResource("introduce.m4a");
         if (url == null) {
             Assert.fail();
         }
-        File file = new File(url.getFile());
+        java.io.File file = new java.io.File(url.getFile());
         String text = openAIService.translations(file);
         System.out.println(text);
         Assert.assertNotNull(text);
@@ -114,6 +125,52 @@ public class OpenAIServiceTest {
         Images images = Images.builder().prompt(prompt).n(n).size(size).build();
         ImagesResponse response = openAIService.generations(images);
         System.out.println(response.toString());
+    }
+
+    @Test
+    public void testFiles() {
+        FileResponse list = openAIService.files();
+        System.out.println(list);
+    }
+
+    @Test
+    public void testGetFile() {
+        FileResponse list = openAIService.files();
+        for (File file : list.getData()) {
+            if (file.getFilename().equals("data.jsonl")) {
+                if (file.getStatus().equals("uploaded")) {
+                    File f = openAIService.getFile(file.getId());
+                    System.out.println(f);
+                    Assert.assertNotNull(f);
+                }
+
+            }
+        }
+    }
+
+    @Test
+    @Ignore
+    public void testGetFileContent() {
+        FileResponse list = openAIService.files();
+        for (File file : list.getData()) {
+            if (file.getFilename().equals("data.jsonl")) {
+                String content = openAIService.getFileContent(file.getId());
+                System.out.println(content);
+                Assert.assertNotNull(content);
+            }
+        }
+    }
+
+    @After
+    public void testDeleteFile() {
+        FileResponse list = openAIService.files();
+        for (io.github.m9d2.chatgpt.model.files.File file : list.getData()) {
+            if (file.getFilename().equals("data.jsonl")) {
+                if (file.getStatus().equals("uploaded")) {
+                    openAIService.deleteFile(file.getId());
+                }
+            }
+        }
     }
 
 }

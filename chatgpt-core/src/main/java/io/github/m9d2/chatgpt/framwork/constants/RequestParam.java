@@ -9,4 +9,6 @@ public interface RequestParam {
     String LANGUAGE = "language";
 
     String PROMPT = "prompt";
+
+    String PURPOSE = "purpose";
 }

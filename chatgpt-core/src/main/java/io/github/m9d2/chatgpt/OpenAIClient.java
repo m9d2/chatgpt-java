@@ -5,14 +5,13 @@ import io.github.m9d2.chatgpt.model.billing.BillingUsage;
 import io.github.m9d2.chatgpt.model.billing.Subscription;
 import io.github.m9d2.chatgpt.model.chat.Completions;
 import io.github.m9d2.chatgpt.model.chat.CompletionsResponse;
+import io.github.m9d2.chatgpt.model.files.File;
+import io.github.m9d2.chatgpt.model.files.FileResponse;
 import io.github.m9d2.chatgpt.model.images.Images;
 import io.github.m9d2.chatgpt.model.images.ImagesResponse;
 import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Query;
+import retrofit2.http.*;
 
 import java.time.LocalDate;
 
@@ -31,6 +30,21 @@ public interface OpenAIClient {
 
     @POST("images/generations")
     Call<ImagesResponse> generations(@Body Images body);
+
+    @GET("files")
+    Call<FileResponse> files();
+
+    @POST("files")
+    Call<File> uploadFile(@Body RequestBody requestBody);
+
+    @DELETE("files/{fileId}")
+    Call<Object> deleteFile(@Path("fileId") String fileId);
+
+    @GET("files/{fileId}")
+    Call<File> getFile(@Path("fileId") String fileId);
+
+    @GET("files/{fileId}/content")
+    Call<String> getFileContent(@Path("fileId") String fileId);
 
     @GET("dashboard/billing/subscription")
     Call<Subscription> subscription();

@@ -12,6 +12,8 @@ import io.github.m9d2.chatgpt.model.billing.BillingUsage;
 import io.github.m9d2.chatgpt.model.billing.Subscription;
 import io.github.m9d2.chatgpt.model.chat.Completions;
 import io.github.m9d2.chatgpt.model.chat.CompletionsResponse;
+import io.github.m9d2.chatgpt.model.files.File;
+import io.github.m9d2.chatgpt.model.files.FileResponse;
 import io.github.m9d2.chatgpt.model.images.Images;
 import io.github.m9d2.chatgpt.model.images.ImagesResponse;
 import okhttp3.*;
@@ -22,7 +24,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -47,15 +48,15 @@ public class OpenAIService {
         this.client = retrofit.create(OpenAIClient.class);
     }
 
-    public String transcriptions(File file) {
+    public String transcriptions(java.io.File file) {
         return transcriptions(file, AudioModel.WHISPER_1, Locale.getDefault(), "");
     }
 
-    public String transcriptions(File file, Locale locale) {
+    public String transcriptions(java.io.File file, Locale locale) {
         return transcriptions(file, AudioModel.WHISPER_1, locale, "");
     }
 
-    public String transcriptions(File file, Locale locale, String prompt) {
+    public String transcriptions(java.io.File file, Locale locale, String prompt) {
         return transcriptions(file, AudioModel.WHISPER_1, locale, prompt);
     }
 
@@ -70,7 +71,7 @@ public class OpenAIService {
      *               The prompt should match the audio language.
      * @return Transcriptions result
      */
-    public String transcriptions(File file, AudioModel model, Locale locale, String prompt) {
+    public String transcriptions(java.io.File file, AudioModel model, Locale locale, String prompt) {
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart(RequestParam.MODEL, model.getValue())
@@ -82,11 +83,11 @@ public class OpenAIService {
         return getAudioResponse(call);
     }
 
-    public String translations(File file) {
+    public String translations(java.io.File file) {
         return translations(file, AudioModel.WHISPER_1, "");
     }
 
-    public String translations(File file, String prompt) {
+    public String translations(java.io.File file, String prompt) {
         return translations(file, AudioModel.WHISPER_1, prompt);
     }
 
@@ -100,7 +101,7 @@ public class OpenAIService {
      *               The prompt should be in English
      * @return Translations result
      */
-    public String translations(File file, AudioModel model, String prompt) {
+    public String translations(java.io.File file, AudioModel model, String prompt) {
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart(RequestParam.MODEL, model.getValue())
@@ -124,7 +125,7 @@ public class OpenAIService {
         return Objects.requireNonNull(response.body()).getText();
     }
 
-    private MultipartBody.Part createFile(File file) {
+    private MultipartBody.Part createFile(java.io.File file) {
         RequestBody fileBody = RequestBody.create(MediaType.parse(ContentType.MULTIPART.getValue()), file);
         return MultipartBody.Part.createFormData(RequestParam.FILE, file.getName(), fileBody);
     }
@@ -231,7 +232,82 @@ public class OpenAIService {
         return response.body();
     }
 
-    protected <T> void handleErrorResponse(Response<T> response) {
+    public FileResponse files() {
+        Call<FileResponse> call = client.files();
+        Response<FileResponse> response;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (!response.isSuccessful()) {
+            handleErrorResponse(response);
+        }
+        return response.body();
+    }
+
+    public File uploadFile(java.io.File file) {
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addPart(createFile(file))
+                .addFormDataPart(RequestParam.PURPOSE, "fine-tune")
+                .build();
+        Call<File> call = client.uploadFile(requestBody);
+        Response<File> response;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (!response.isSuccessful()) {
+            handleErrorResponse(response);
+        }
+        return response.body();
+    }
+
+    public void deleteFile(String fileId) {
+        Call<Object> call = client.deleteFile(fileId);
+        Response<Object> response;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (!response.isSuccessful()) {
+            handleErrorResponse(response);
+        }
+    }
+
+    public File getFile(String fileId) {
+        Call<File> call = client.getFile(fileId);
+        Response<File> response;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (!response.isSuccessful()) {
+            handleErrorResponse(response);
+        }
+        return response.body();
+    }
+
+    public String getFileContent(String fileId) {
+        Call<String> call = client.getFileContent(fileId);
+        Response<String> response;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (!response.isSuccessful()) {
+            handleErrorResponse(response);
+        }
+        return response.body();
+    }
+
+
+    private <T> void handleErrorResponse(Response<T> response) {
         try (ResponseBody errorBody = response.errorBody()) {
             if (errorBody == null) {
                 throw new ChatGPTException("response errorBody is null");
