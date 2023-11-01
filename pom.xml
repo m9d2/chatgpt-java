@@ -6,7 +6,7 @@
 
     <groupId>io.github.m9d2</groupId>
     <artifactId>chatgpt-java</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <packaging>pom</packaging>
     <description>ChatGPT Java SDK</description>
     <url>https://github.com/m9d2/chatgpt-java</url>
